@@ -44,7 +44,9 @@ ActiveAdmin.register AdminUser do
       end
       f.input :password
       f.input :password_confirmation
-      f.input :role, label: '角色', as: :radio, collection: AdminUser.roles.map { |role| [I18n.t("common.#{role}"), role] }
+      if f.object.new_record?
+        f.input :role, label: '角色', as: :radio, collection: AdminUser.roles.map { |role| [I18n.t("common.#{role}"), role] }
+      end
     end
     f.actions
   end
