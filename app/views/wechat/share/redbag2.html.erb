@@ -1,0 +1,64 @@
+<div class="container share-content">
+  <% if @redbag.blank? %>
+  <div class="center-box">
+    未找到红包
+  </div>
+  <% else %>
+  
+  <!-- 分享提示框 -->
+  <div class="alert alert-warning alert-dismissible fade in" role="alert" style="margin-top: 15px">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>分享提示：</strong> 点击右上角按钮分享
+  </div>
+  
+  <div class="event-body">
+    <h2 class="title"><%= @redbag.title %></h2>
+    <p class="user-info-d">
+      <%= user_avatar_tag(@redbag.ownerable, :big, 'img-circle avatar') %>
+      <span class="nickname">
+        <%= @redbag.ownerable.try(:format_nickname) || '官方平台' %>
+      </span>
+    </p>
+    <div class="body">
+      <%= simple_format @redbag.hbable.try(:body) %>
+    </div>
+    
+  </div>
+  
+  <div class="follow-tip event-body">
+    <%= simple_format Page.find_by(slug: 'offical_share_tip_image').try(:body) %>
+  </div>
+  
+  <% end %>
+</div>
+
+<% content_for :scripts do %>
+<script>
+    
+  App.wxConfig({
+    debug: <%= @sign_package[:debug] %>,
+    appId: '<%= @sign_package[:appId] %>',
+    timestamp: <%= @sign_package[:timestamp] %>,
+    nonceStr: '<%= @sign_package[:nonceStr] %>',
+    signature: '<%= @sign_package[:signature] %>',
+    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone','openLocation','getLocation']
+  }, function(res) {
+    // console.log(res);
+    App.wxShare({
+      title: '<%= @share_title %>',
+      desc: '<%= CommonConfig.share_desc || '' %>',
+      link: '<%= request.original_url %>',
+      img_url: '<%= @share_image_url %>',
+    }, function(res) {
+      // 成功sendShareStat
+      App.sendShareStat2('<%= params[:token] %>', '<%= @redbag.uniq_id %>', '<%= @i %>', '<%= @ak %>')
+    }, function() {
+      // 取消
+    }, function(error) {
+      // 失败
+    });
+  }, function(error) {
+    console.log(error);
+  });
+</script>
+<% end %>

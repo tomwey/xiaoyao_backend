@@ -1,0 +1,72 @@
+<div class="game-status">
+  <table>
+    <tbody>
+      <tr>
+        <th>在线玩家</th>
+        <th>总玩家</th>
+      </tr>
+      <tr>
+        <td id="online-players">0</td>
+        <td id="total-players">0</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="game-data"></div>
+</div>
+
+<script>
+  
+  window.GameService = {
+    fetchData: function() {
+      <%
+      results = GameService.fetch_data
+      proxy_info = results["proxyinfo"][0]
+      player_count = proxy_info["playercount"]
+      
+      total_info = GameService.get_total_player
+      
+      if total_info
+        total = total_info['count']
+      else
+        total = 0
+      end
+      
+      gsinfo = results["gsinfo"][0]
+      gameinfo = gsinfo["gameinfo"]
+      
+      hash = {
+        '18' => '血战到底',
+        '20' => '血流成河',
+        '28' => '乐山麻将',
+        '19' => '绵阳麻将',
+        '24' => '广安麻将',
+        '29' => '牛牛',
+        '32' => '斗地主'
+      }
+      
+      html = ''
+      gameinfo.each do |info|
+        type = info["type"].to_s
+        name = hash[type]
+        if name
+          html += '<div class="game"><h2>' + name + '</h2><p>在线人数: ' + info["playercount"].to_s + '</p></div>'
+        end
+      end
+       %>
+       
+      var total = '<%= player_count %>';//re.proxyinfo[0].playercount;
+      $('#online-players').text(total);
+      $('#total-players').text('<%= total %>');
+      
+      $('#game-data').html('<%= raw html %>');
+      
+      setTimeout(function() {
+        GameService.fetchData();
+      }, 2000);
+    },
+  };
+  
+  $(document).ready(function() {
+    GameService.fetchData();
+  });
+</script>

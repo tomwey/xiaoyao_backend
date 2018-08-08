@@ -1,0 +1,6 @@
+<a class="redpack-box" style="background-image:url(<%= @img_url %>)" onclick="javascript:alert('抢红包');">
+  
+</a>
+<% if @redpack.bg_audio %>
+<audio src="<%= @redpack.bg_audio %>" autoplay></audio>
+<% end %>

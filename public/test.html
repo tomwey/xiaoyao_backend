@@ -1,0 +1,14 @@
+<script src="https://cdn.bootcss.com/flv.js/1.4.2/flv.min.js"></script>
+<video id="videoElement"></video>
+<script>
+  if (flvjs.isSupported()) {
+    var videoElement = document.getElementById('videoElement');
+    var flvPlayer = flvjs.createPlayer({
+      type: 'mp4',
+      url: 'http://pcvideogs.titan.mgtv.com/c1/2018/05/27_0/BF71B04C00B9492998369EFFE4086B02_20180527_1_1_484.mp4?arange=0&pm=m6n4piR3j2IjZBQmwFXT_M1P3XHd~v7QdKv8_5Eb3yAh1N6KvnQhrhWo3k0aTjDmwmdJq4QUGDYOzpgqE23g08UkAKBMZMDx_xdXsVV85PDiSZUpg9WZqdsVCRiHYoxSms8PDqjod8QROK_wg_iQ~TrGDlWZChvLG8wLHZDnazMYPmbjBQCLOy4X2EE3I4YsZx37y7nv6NPmsxdCDx_34FIE5UF02cBAkURi54OruqHGjEd3M5iSQCmWZyUX75u9EaBqF5k7_FzNC1llQd56~VTgny8VIa1eZ~hvs8EEzrZidVYTvdzXD~8uujL1BgRUw3Y8tHCQO6~vc8Gz3hMLcolq4EA4KL4Ou8wEY~xG9ZI~ieplgpCCbrB2a5ItjO89iMI04mhzot_nDKurYw7VPg--'
+    });
+    flvPlayer.attachMediaElement(videoElement);
+    flvPlayer.load();
+    flvPlayer.play();
+  }
+</script>

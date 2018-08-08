@@ -1,0 +1,25 @@
+<div class="container">
+  <% if event.blank? %>
+  <% else %>
+    
+  <div class="event-body">
+    <h2 class="title"><%= event.title %></h2>
+    <p class="stats">人气 0，转发 0，参与 0</p>
+    <p class="user-info-d">
+      <%= user_avatar_tag(event.ownerable, :big, 'img-circle avatar') %>
+      <span class="nickname">
+        <%= event.ownerable.try(:format_nickname) || '官方平台' %>
+      </span>
+    </p>
+    <div class="body">
+      <%= simple_format event.body %>
+    </div>
+    
+  </div>
+  
+  <!-- div class="follow-tip">
+    <%= image_tag 'qrcode.png', class: 'qrcode-img' %>
+    <p>长按识别二维码关注，抢红包！</p>
+  </div -->
+  <% end %>
+</div>

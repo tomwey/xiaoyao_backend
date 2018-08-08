@@ -1,0 +1,33 @@
+<div class="panel">
+  <h3 class="tmp-title">超过3天未抢过红包的用户（<%= users.size %>）<div class="table_actions send_message_btn_container"><%= link_to '发消息', new_cpanel_message_path(ids: users.map(&:id).join(',')) %></div></h3>
+  <div class="panel_contents">
+    <table border="0" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th class="col col-">头像</th>
+          <th class="col col-">昵称</th>
+          <th class="col col-">关注时间</th>
+          <th class="col col-">取关时间</th>
+          <th class="col col-">抢红包次数</th>
+          <th class="col col-">抢红包总金额</th>
+          <th class="col col-">距离上次抢红包的天数</th>
+          <th class="col col-">最近一次抢红包时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.each_with_index do |user,index| %>
+        <tr class="<%= index % 2 == 0 ? 'odd' : 'even' %>" id="user_<%= user.id %>">
+          <td class="col col-"><img src="<%= user.real_avatar_url %>" alt="0" width="32" height="32"></td>
+          <td class="col col-"><a href="<%= cpanel_user_path(user) %>"><%= user.format_nickname %></a></td>
+          <td class="col col-"><%= user.wechat_profile.try(:subscribe_time).blank? ? '' : Time.at(user.wechat_profile.subscribe_time.to_i).strftime('%Y年%m月%d日 %H:%M:%S') %></td>
+          <td class="col col-"><%= user.wechat_profile.try(:unsubscribe_time).blank? ? '' : user.wechat_profile.unsubscribe_time.strftime('%Y年%m月%d日 %H:%M:%S') %></td>
+          <td class="col col-"><%= user.redbag_earn_logs.count %></td>
+          <td class="col col-"><%= user.redbag_earn_logs.sum(:money).to_f %></td>
+          <td class="col col-"><%= ((Time.zone.now - user.redbag_earn_logs.order('id desc').first.created_at) / 86400).to_i %></td>
+          <td class="col col-"><%= user.redbag_earn_logs.order('id desc').first.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

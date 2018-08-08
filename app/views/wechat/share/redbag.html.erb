@@ -1,0 +1,121 @@
+<div class="container share-content">
+  <% if @redbag.blank? %>
+  <div class="center-box">
+    未找到红包
+  </div>
+  <% else %>
+  
+  <!-- 分享提示框 -->
+  <!-- <div class="alert alert-warning alert-dismissible fade in" role="alert" style="margin-top: 15px">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>分享提示：</strong> 点击右上角按钮分享朋友抢红包！
+    <% if @has_share_hb %>
+    <span style="color:red;">您的朋友成功抢得红包，您也会获得红包奖励~</span>
+    <% end %>
+  </div> -->
+  <div class="share-tips">
+    点击右上角按钮分享朋友抢红包！
+  </div>
+  
+  <div class="event-body">
+    <h2 class="title"><%= @redbag.title %></h2>
+    <p class="stats">人气 <%= @redbag.view_count %>，分享 <%= @redbag.share_count %>，参与 <%= @redbag.redbag_earn_logs.count %></p>
+    <p class="user-info-d">
+      <%= user_avatar_tag(@redbag.ownerable, :big, 'img-circle avatar') %>
+      <span class="nickname">
+        <%= @redbag.ownerable.try(:format_nickname) || '官方平台' %>
+      </span>
+    </p>
+    <div class="body">
+      <%= simple_format @redbag.hbable.try(:body) %>
+    </div>
+    
+  </div>
+  
+  <div class="event-body">
+    <h2 class="title"><%= I18n.t("common.#{@redbag.ruleable_type}.title") %></h2>
+    <% if @redbag.ruleable_type != 'SharePoster' %>
+    <p class="grab-tip"><%= raw I18n.t("common.#{@redbag.ruleable_type}.grab_tip", accuracy: @redbag.ruleable.try(:accuracy)) %></p>
+    <% else %>
+    <p class="grab-tip">长按下图，识别二维码抢红包</p>
+    <% end %>
+    <div class="rule-container">
+      <% if @redbag.ruleable_type == 'Question' %>
+        <h4 class="question"><%= @redbag.ruleable.question %></h4>
+        <% @redbag.ruleable.answers.each_with_index do |answer,index| %>
+        <div class="radio">
+          <label>
+            <input type="radio" name="answerOption" id="optionsRadios<%= index %>" value="<%= index %>">
+            <%= answer %>
+          </label>
+        </div>
+        <% end %>
+      <% elsif @redbag.ruleable_type == 'LocationCheckin' %>
+        <p class="address"><%= @redbag.ruleable.try(:address) %></p>
+      <% elsif @redbag.ruleable_type == 'SharePoster' %>
+        <img src="<%= @redbag.share_poster_image_for_user(@user) %>">
+      <% end %>
+    </div>
+    
+    <% if @redbag.ruleable_type != 'SharePoster' %>
+    <div class="grab-btn">
+      <button id="commitBtn" data-eid="<%= @redbag.uniq_id %>" type="button" data-loading-text="提交中..." data-loading="0" data-type="<%= @redbag.ruleable_type %>" data-auth-url="<%= @wx_auth_url %>" onclick="App.grabHongbao(this, '<%= @i %>', '<%= @ak %>')" class="btn btn-block btn-danger"><%= I18n.t("common.#{@redbag.ruleable_type}.action") %></button>
+    </div>
+    <% end %>
+  </div>
+  <!-- div class="follow-tip">
+    <%= image_tag 'qrcode.png', class: 'qrcode-img' %>
+    <p>长按识别二维码关注，抢红包！</p>
+  </div -->
+  
+  <% if @redbag.ruleable_type != 'SharePoster' %>
+  <div class="follow-tip event-body">
+    <%= simple_format Page.find_by(slug: 'offical_share_tip_image').try(:body) %>
+  </div>
+  <% end %>
+  
+  <% end %>
+</div>
+
+<% content_for :scripts do %>
+<script>
+  
+  // 保存当前用户的登录Token
+  <% if @current_token %>
+    App.saveToken('<%= @current_token %>')
+  <% else %>
+    // 保存分享人的token
+    <% if params[:token] %>
+      window.localStorage.setItem('from_user', '<%= params[:token] %>')
+    <% end %>
+  <% end %>
+  
+  App.wxConfig({
+    debug: <%= @sign_package[:debug] %>,
+    appId: '<%= @sign_package[:appId] %>',
+    timestamp: <%= @sign_package[:timestamp] %>,
+    nonceStr: '<%= @sign_package[:nonceStr] %>',
+    signature: '<%= @sign_package[:signature] %>',
+    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone','openLocation','getLocation']
+  }, function(res) {
+    // console.log(res);
+    App.wxShare({
+      title: '<%= @share_title %>',
+      desc: '<%= CommonConfig.share_desc || '' %>',
+      link: '<%= request.original_url %>',
+      img_url: '<%= @share_image_url %>',
+    }, function(res) {
+      // 成功sendShareStat
+      App.sendShareStat2('<%= params[:token] %>', '<%= @redbag.uniq_id %>', '<%= @i %>', '<%= @ak %>')
+    }, function() {
+      // 取消
+    }, function(error) {
+      // 失败
+    });
+  }, function(error) {
+    // console.log(error);
+  });
+  
+  App.viewHB('<%= @redbag.uniq_id %>', '<%= @i %>', '<%= @ak %>');
+</script>
+<% end %>

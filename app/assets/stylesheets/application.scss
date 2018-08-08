@@ -1,0 +1,195 @@
+/*
+ *= require redactor-rails
+ *= redactor-rails/plugins
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html,body{height: 100%;width: 100%;margin:0;padding:0;}  
+
+body {
+//  padding-top: 60px;
+}
+
+img {
+  max-width: 100%;
+}
+
+p, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.products {
+//  h2 {
+//    padding: 5px 10px;
+//  }
+//  p {
+//    padding: 0 10px;
+//  }
+  img {
+    max-width: 100%;
+  }
+}
+
+.form-signin {
+  max-width: 350px;
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  margin-top: 40px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  background-color: #eee;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-signin-heading {
+  font-size: 1.2em;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.app-changelog {
+  margin: 20px 0;
+//  margin-bottom: 30px;
+  font-size: 1.2em;
+}
+.app-download {
+  text-align: center;
+  > .btn {
+    width: 68.2%;
+  }
+}
+
+.redpack-box {
+  display: block;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+.redback-test {
+  display: block;
+  background-color: gray;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+//  background-size: cover;  //只支持IE9+
+//  -webkit-background-size: cover; //webkit核心
+//  -moz-background-size: cover; //FF核心
+//  -o-background-size: cover; //应该是Opera核心吧，反正不是IE的，就先不管它了
+  
+  background-image:url("http://hb-assets.small-best.com/uploads/redpack_theme/cover/4/big_f4c110d0-26b2-4419-81eb-2f363b1b2135.jpg?e=1842343376&token=TL7vgIdADfCg9dJGncUGqvj51t0JfO8IORBBO9JX:G74YA0jM6A6AuH3nLaIVZvX6iM0=&watermark/3/image/aHR0cDovL2hoZC5hZnRlcndpbmQuY24vcXJjb2RlP3RleHQ9aHR0cDovL2hoZC5hZnRlcndpbmQuY24vcmVkcGFjaz9pZD0yNDA3NTI2Mg==/gravity/South/dissolve/100/dx/10/dy/60/text/5rqQ56CB5pe25Luj6YCB5L2g5LiA5LiqMTAw5YWD55qE57qi5YyF/gravity/Center/font/6buR5L2T/fontsize/880/fill/I0Y4RDNBNg==/dissolve/100/dx/0/dy/120");
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.login-box {
+  background:rgba(0,0,0,0.9);
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  padding-top: 60px;
+  h2 {
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-weight:normal;
+    margin-bottom: 120px;
+//    margin-top: 30px;
+  }
+  
+  .login-button {
+    display: block;
+    width: 80px;
+    height: 80px;
+    color: white;
+  }
+  .qq {
+    max-width: 70px;
+  }
+}
+
+.empty-box {
+  display: block;
+  width: 80%;
+  padding: 30px;
+  border: 2px dashed #ccc;
+  text-align: center;
+  color: #ccc;
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+table {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+}
+
+td {
+  border-left: solid 10px #000;
+  padding: 0; 
+  margin: 0; 
+  width: 0px; 
+  height: 10px; 
+}
+
+td.black { border-color: #000; }
+td.white { border-color: #fff; }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render_page_title %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width,height=device-height">
+  <%= stylesheet_link_tag    'share', media: 'all' %>
+  <%= yield :styles %>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<%= yield %>
+
+<!-- 微信JS SDK -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<!-- QQ 定位组件 -->
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+
+<%= javascript_include_tag 'share' %>
+<%= yield :scripts %>
+</body>
+</html>

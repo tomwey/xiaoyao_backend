@@ -1,0 +1,6 @@
+<% if weixin_xml.type == 'event' %>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[<%= @msg || CommonConfig.wx_welcome %>]]></Content>
+<% else %>
+<MsgType><![CDATA[transfer_customer_service]]></MsgType>
+<% end %>

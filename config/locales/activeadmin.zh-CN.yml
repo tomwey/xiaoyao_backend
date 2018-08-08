@@ -1,0 +1,17 @@
+"zh-CN":
+  active_admin:
+    # powered_by: "Copyright 2016 农家"
+    batch_actions:
+      labels:
+        block: "禁用"
+        unblock: "启用"
+        sale: "上架"
+        unsale: "下架"
+        cancel: '订单取消'
+        ship: '订单配送'
+        complete: '订单完成'
+        open: '打开'
+        close: '关闭'
+        approve: '审核'
+        cancel_approve: '取消审核'
+        reject: '拒绝'

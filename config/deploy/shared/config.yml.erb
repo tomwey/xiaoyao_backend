@@ -1,0 +1,12 @@
+defaults: &defaults
+  app_name: "<%= fetch(:application) %>"
+  domain: "<%= fetch(:server_name) %>"
+  admin_emails:
+    - "admin@admin.com"
+  email_sender: 'noreply@shuiguoshe.com'
+  upload_url: "http://<%= fetch(:server_name) %>"
+  secret_key_base: 
+  devise_secret_key: 
+
+<%= fetch(:rails_env) %>:
+  <<: *defaults

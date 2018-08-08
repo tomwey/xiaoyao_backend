@@ -1,0 +1,450 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$theme-red: rgb(187,64,42);
+$golden: rgb(228,196,129);
+
+body {
+  background-color: rgb(247,247,247);
+//  padding-top: 60px;
+}
+
+img {
+  max-width: 100%;
+}
+
+p, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.center-box {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  text-align: center;
+}
+
+.wx-share-topbar {
+  padding: 15px;
+  background-color: $theme-red;
+  color: white;
+  .icon-header {
+    width: 50px;
+    height: 50px;
+  }
+  .wx-prentice {
+    padding-left: 10px;
+  }
+}
+
+.promoto-box {
+  background-color: white;
+  padding-bottom: 15px;
+  .qrcode-img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+  }
+  .qrcode-follow-tip {
+    text-align: center;
+  }
+}
+
+.top-3-earn-users {
+  margin-top: 30px;
+  background-color: #fff;
+  .user-rank-header {
+    text-align: center;
+    font-size: 18px;
+    background-color: $theme-red;
+    color: $golden;
+    border: 0;
+    margin: 0 -1px;
+    margin-top: -1px;
+  }
+  
+  table {
+    width: 100%;
+    tr {
+      td {
+        padding: 20px 0;
+      }
+      border-bottom: 1px solid rgb(241,241,241);
+      &:last-child {
+        border: 0;
+      };
+      
+      .user-info {
+        text-align: right;
+        p {
+          text-align: right;
+        }
+        .user-name {
+          font-size: 20px;
+          color: rgb(58,58,58);//rgb(110,143,173);
+        }
+        .earn-info {
+          font-size: 18px;
+          color: rgb(178,178,178);
+          .digit {
+            color: $theme-red;//rgb(238,103,101);
+//            font-weight: bold;
+            padding: 0 5px;
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.latest-10-earn-history {
+  margin: 30px 0;
+  
+  .earn-item {
+    padding: 15px;
+    border: 1px solid #eee;
+    background-color: white;
+    margin-bottom: 30px;
+    &:last-child {
+      margin-bottom: 0;
+    };
+    .user-avatar {
+      float: left;
+    }
+    
+    .user-name {
+      font-size: 18px;
+      color: rgb(58,58,58);
+    }
+    
+    .earn-log-info {
+      float: left;
+      width: calc(100% - 60px);
+      margin-left: 10px;
+      
+      .event-name {
+        color: $golden;
+      }
+      .money {
+        padding: 0 5px;
+        font-size: 24px;
+        color: $theme-red;
+      }
+    }
+    
+    .common-text {
+      font-size: 18px;
+      color: rgb(178,178,178);//rgb(110,143,173); 
+    }
+    .earn-time {
+      font-size: 14px;
+      color: #ccc;
+      padding-left: 5px;
+    }
+    .earn-detail {
+      margin-top: 10px;
+    }
+  }
+}
+
+.share-tips {
+  width: 100%;
+  height: 37px;
+  line-height: 37px;
+  text-align: center;
+//  border: 1px dashed #eee;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  color: rgb(221,221,221);
+}
+
+.event-body {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 0 1px #888;
+  background-color: white;
+  img {
+    display: block;
+    max-width: 100%;
+    margin: 2px auto;
+    width: 100%;
+//    margin: 2px -15px;
+  }
+  
+  .grab-tip {
+    color: red;
+  }
+  
+  .question {
+    font-size: 16px;
+    font-weight: normal;
+  }
+  
+  .title {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+//    margin: 10px 0;
+  }
+  .stats {
+    margin-bottom: 15px;
+    clear: both;
+    
+    .like-btn {
+      float: right;
+      margin-top: 3px;
+    }
+  }
+  
+  .grab-btn {
+    margin-top: 30px;
+  }
+  
+  .user-info-d {
+    height: 65px;
+    margin-bottom: 15px;
+    clear: both;
+    margin-left: -15px;
+    margin-right: -15px;
+    border-bottom: 1px solid #ddd;
+//    background-color: red;
+//    text-align: left;
+
+    .avatar {
+//      float: left;
+      width: 50px;
+      height: 50px;
+      margin-left: 15px;
+      float: left;
+    }
+    
+    .nickname {
+      float: left;
+      margin-left: 10px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.share-tip {
+  color: red;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.top-20-earn-logs {
+  td {
+    height: 60px;
+    vertical-align: middle;
+  }
+  .user-avatar {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+//    max-height: 100%;
+//    width: 100%;
+  }
+  .user-info {
+    padding-left: 15px;
+  }
+  
+  .money-td {
+//    width: 58px;
+    text-align: right;
+//    background-color: red;
+    p.money {
+      text-align: right;
+//      background-color: green;
+    }
+  }
+}
+
+.rule-container {
+  margin-top: 15px;
+  padding: 10px;
+  border: 2px dashed #b8b8b8;
+}
+
+.follow-tip {
+  text-align: center;
+  padding: 10;
+  
+  img {
+    max-width: 100%;
+    width: 100%;
+  }
+//  padding-bottom: 15px;
+//  padding-top: 10px;
+  font-size: 16px;
+
+  .title {
+    font-size: 22px;
+    color: $theme-red;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .share-desc {
+    text-align: left;
+  }
+  .help {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+  .qrcode-img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+  }
+}
+
+#hb-result-modal {
+  .modal-header {
+//      padding:9px 15px;
+//      border-bottom:1px solid #eee;
+      background-color: $theme-red;
+      -webkit-border-top-left-radius: 5px;
+      -webkit-border-top-right-radius: 5px;
+      -moz-border-radius-topleft: 5px;
+      -moz-border-radius-topright: 5px;
+       border-top-left-radius: 5px;
+       border-top-right-radius: 5px;
+   }
+   .modal-title {
+     text-align: center;
+     color: white;
+   }
+   
+   .hb-result {
+     text-align: center;
+     margin-top: 20px;
+     margin-bottom: 30px;
+     font-size: 16px;
+     .money {
+       font-size: 28px;
+       font-family: 'PingFang SC';
+       .unit {
+         font-size: 16px;
+       }
+     }
+     
+     .follow-tips {
+       margin-top: 15px;
+       padding: 0 30px;
+       font-size: 12px;
+       font-family: 'PingFang SC';
+       
+//       margin-top: 30px;
+//       font-size: 12px;
+     }
+   }
+   
+   .hb-result-success {
+     font-size: 18px;
+     color: $theme-red;
+     font-weight: bold;
+   }
+   
+   .hb-result-fail {
+     color: rgb(58,58,58);
+     font-weight: normal;
+   }
+   
+   .user-info {
+     margin-top: 20px;
+     text-align: center;
+     .nickname {
+       font-weight: normal;
+       font-size: 18px;
+       margin-bottom: 30px;
+     }
+     .ga {
+       font-size: 16px;
+       color: $theme-red;
+       font-weight: normal;
+     }
+   }
+}
+
+.navbar {
+  background-color: $theme-red;
+  color: white;
+}
+.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+.title {float:none; font-size: 18px;}
+
+.share-button-container {
+  margin-top: 60px;
+  
+  .money {
+    font-size: 30px;
+    color: rgb(255,193,60);
+    font-family: 'PingFang SC';
+  }
+  .btn {
+//    padding: 10px 0;
+    font-size: 18px;
+    background-color: $theme-red;
+    padding-bottom: 8px;
+  }
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+//.share-content {
+//  position: relative;
+//}
+
+.home-btn {
+  display: block;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  &:hover {
+    color: white;
+  };
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render_page_title %>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <!-- meta name="format-detection" content="telephone=no" -->
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width,height=device-height">
+  <meta name="full-screen" content="yes">
+  <!-- UC应用模式 -->
+  <meta name="browsermode" content="application">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= yield :styles %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+<!-- 微信JS SDK -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<!-- QQ 定位组件 -->
+<script src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+
+<%= javascript_include_tag 'application' %>
+<%= yield :scripts %>
+</body>
+</html>

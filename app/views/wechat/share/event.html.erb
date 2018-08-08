@@ -1,0 +1,166 @@
+<div class="container">
+  <% if @event.blank? %>
+  <div class="center-box">
+    未找到活动
+  </div>
+  <% else %>
+  
+  <!-- 分享提示框 -->
+  <div class="alert alert-warning alert-dismissible fade in" role="alert" style="margin-top: 15px">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>分享提示：</strong> 点击右上角按钮分享朋友抢红包！
+    <% if @has_share_hb %>
+    <span style="color:red;">您的朋友成功抢得红包，您也会获得红包奖励~</span>
+    <% end %>
+  </div>
+  
+  <div class="event-body">
+    <h2 class="title"><%= @event.title %></h2>
+    <p class="stats">人气 <%= @event.view_count %>，转发 <%= @event.share_count %>，点赞 <%= @event.likes_count %></p>
+    <p class="user-info-d">
+      <%= user_avatar_tag(@event.ownerable, :big, 'img-circle avatar') %>
+      <span class="nickname">
+        <%= @event.ownerable.try(:format_nickname) || '官方平台' %>
+      </span>
+    </p>
+    <div class="body">
+      <%= simple_format @event.body %>
+    </div>
+    
+  </div>
+  
+  <div class="event-body">
+    <h2 class="title"><%= I18n.t("common.#{@event.ruleable_type}.title") %></h2>
+    <p class="grab-tip"><%= raw I18n.t("common.#{@event.ruleable_type}.grab_tip", accuracy: @event.ruleable.try(:accuracy)) %></p>
+    <div class="rule-container">
+      <% if @event.ruleable_type == 'QuizRule' %>
+        <h4 class="question"><%= @event.ruleable.question %></h4>
+        <% @event.ruleable.answers.each_with_index do |answer,index| %>
+        <div class="radio">
+          <label>
+            <input type="radio" name="answerOption" id="optionsRadios<%= index %>" value="<%= index %>">
+            <%= answer %>
+          </label>
+        </div>
+        <% end %>
+      <% elsif @event.ruleable_type == 'CheckinRule' %>
+        <p class="address"><%= @event.ruleable.try(:address) %></p>
+      <% end %>
+    </div>
+    <div class="grab-btn">
+      <button id="commitBtn" data-eid="<%= @event.uniq_id %>" type="button" data-loading-text="提交中..." data-loading="0" data-type="<%= @event.ruleable_type %>" data-auth-url="<%= @wx_auth_url %>" onclick="App.grabHongbao(this, '<%= @i %>', '<%= @ak %>')" class="btn btn-block btn-danger"><%= I18n.t("common.#{@event.ruleable_type}.action") %></button>
+    </div>
+  </div>
+  <!-- div class="follow-tip">
+    <%= image_tag 'qrcode.png', class: 'qrcode-img' %>
+    <p>长按识别二维码关注，抢红包！</p>
+  </div -->
+  
+    <% if @earn_logs.any? %>
+    <div class="top-20-earn-logs panel panel-default">
+      <div class="panel-heading">
+        共 <%= @event.current_hb.sent_money == 0.0 ? '0.00' : '%.2f' % @event.current_hb.sent_money %> / <%= @event.current_hb.total_money == 0.0 ? '0.00' : '%.2f' % @event.current_hb.total_money %> 元
+      </div>
+      <div class="panel-body">
+        <table>
+          <% @earn_logs.each do |log| %>
+          <tr>
+            <td width="18%">
+              <%= user_avatar_tag log.user, :large, 'img-circle user-avatar' %>
+            </td>
+            <td class="user-info-td" width="64%">
+              <div class="user-info">
+                <p><%= log.user.try(:format_nickname).blank? ? '匿名' : log.user.try(:format_nickname) %></p>
+                <p class="text-muted"><%= log.created_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+              </div>
+            </td>
+            <td class="money-td" width="18%">
+              <p class="money"><%= log.money == 0.0 ? '0.00' : '%.2f' % log.money %>元</p>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="hb-result-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">抢红包结果</h4>
+      </div>
+      <div class="modal-body">
+        <div class="user-info">
+          <%= user_avatar_tag(@event.ownerable, :big, 'img-circle avatar') %>
+          <h4 class="nickname">
+            <%= @event.ownerable.try(:format_nickname) || '官方平台' %>
+          </h4>
+          <p class="ga" id="result-tip">恭喜发财，大吉大利！</p>
+        </div>
+        
+      </div>
+      
+      <div class="hb-result" id="hb-result">
+        
+      </div>
+      
+      <div class="modal-footer">
+        <div class="follow-tip">
+          <div id="follow-tip">
+            <p>识别二维码，关注公众号</p>
+            <p>领取更多红包！</p>
+          </div>
+          <%= image_tag CommonConfig.offical_qrcode, class: 'qrcode-img' %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% content_for :scripts do %>
+<script>
+  
+  // 保存当前用户的登录Token
+  <% if @current_token %>
+    App.saveToken('<%= @current_token %>')
+  <% else %>
+    // 保存分享人的token
+    <% if params[:token] %>
+      window.localStorage.setItem('from_user', '<%= params[:token] %>')
+    <% end %>
+  <% end %>
+  
+  App.wxConfig({
+    debug: <%= @sign_package[:debug] %>,
+    appId: '<%= @sign_package[:appId] %>',
+    timestamp: <%= @sign_package[:timestamp] %>,
+    nonceStr: '<%= @sign_package[:nonceStr] %>',
+    signature: '<%= @sign_package[:signature] %>',
+    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone','openLocation','getLocation']
+  }, function(res) {
+    // console.log(res);
+    App.wxShare({
+      title: '<%= @share_title %>',
+      desc: '<%= CommonConfig.share_desc || '' %>',
+      link: '<%= request.original_url %>',
+      img_url: '<%= CommonConfig.share_image_url || '' %>',
+    }, function(res) {
+      // 成功sendShareStat
+      App.sendShareStat('<%= params[:token] %>', '<%= @event.uniq_id %>', '<%= @i %>', '<%= @ak %>')
+    }, function() {
+      // 取消
+    }, function(error) {
+      // 失败
+    });
+  }, function(error) {
+    console.log(error);
+  });
+</script>
+<% end %>

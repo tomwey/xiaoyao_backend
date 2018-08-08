@@ -1,0 +1,46 @@
+<div class="container">
+  <% if event.blank? %>
+  <% else %>
+    
+  <div class="event-body">
+    <h2 class="title"><%= event.hbable.try(:title) %></h2>
+    <p class="stats">人气 <%= event.view_count %>，转发 <%= event.share_count %>，参与 <%= event.redbag_earn_logs.count %></p>
+    <p class="user-info-d">
+      <%= user_avatar_tag(event.ownerable, :big, 'img-circle avatar') %>
+      <span class="nickname">
+        <%= event.ownerable.try(:format_nickname) || '官方平台' %>
+      </span>
+    </p>
+    <div class="body">
+      <%= simple_format event.hbable.try(:body) %>
+    </div>
+    
+  </div>
+  
+  <% if event.ruleable %>
+  <div class="event-body">
+    <h2 class="title"><%= I18n.t("common.#{event.ruleable_type}.title") %></h2>
+    <p class="grab-tip"><%= raw I18n.t("common.#{event.ruleable_type}.grab_tip", accuracy: event.ruleable.try(:accuracy)) %></p>
+    <div class="rule-container">
+      <% if event.ruleable_type == 'Question' %>
+        <h4 class="question"><%= event.ruleable.question %></h4>
+        <% event.ruleable.answers.each_with_index do |answer,index| %>
+        <div class="radio">
+          <label>
+            <input type="radio" name="answerOption" id="optionsRadios<%= index %>" value="<%= index %>">
+            <%= answer %>
+          </label>
+        </div>
+        <% end %>
+      <% elsif event.ruleable_type == 'LocationCheckin' %>
+        <p class="address"><%= event.ruleable.try(:address) %></p>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+  <!-- div class="follow-tip">
+    <%= image_tag 'qrcode.png', class: 'qrcode-img' %>
+    <p>长按识别二维码关注，抢红包！</p>
+  </div -->
+  <% end %>
+</div>

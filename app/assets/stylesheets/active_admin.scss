@@ -1,0 +1,373 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+/*
+ *= require jquery.chosen
+ *= require redactor-rails
+ *= redactor-rails/plugins
+ */
+
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+//@import "active_admin/base";
+@import "arctic_admin/base";
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+form fieldset > ol >li p.inline-hints {
+  font-size: 0.8em;
+  color: #666;
+  font-style: italic;
+  margin: 0.5em 0 0 25%;
+}
+
+.redactor-box {
+  width: 74.9%!important;
+  margin-left: 25%!important;
+}
+
+.game-status {
+  table {
+    border: 0;
+    td,th {
+      text-align: center;
+    }
+  }
+  
+  #game-data {
+    margin-top: 20px;
+    .game {
+      float: left;
+      padding: 30px;
+      border: 1px solid #ccc;
+      text-align: center;
+      border-radius: 8px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+      color: #666;
+      h2, p {
+        margin: 0;
+        padding: 0;
+      }
+      h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: normal;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+    
+  } 
+}
+
+.dropzone{
+  border: dashed 1px #666;
+  width: 600px;
+  padding: 30px 10px 30px 10px;
+  margin-bottom: 20px;
+}
+
+#active_admin_content {
+  img {
+    max-width: 100%;
+  }
+}
+
+a.button.has_many_add {
+  margin-left: 273px;
+  margin-bottom: 30px;
+}
+
+a.button.has_many_remove {
+  margin-left: 273px;
+}
+
+.avatar {
+  .uface,
+  .media-object { border-radius: 120px; }
+}
+.avatar-16 { width: 16px; height: 16px; border-radius: 120px; }
+.avatar-32 { width: 32px; height: 32px; border-radius: 120px; }
+.avatar-48 { width: 48px; height: 48px; border-radius: 120px; }
+.avatar-96 { width: 96px; height: 96px; border-radius: 120px; }
+@media (max-width: 480px) {
+  .avatar-48 { width: 32px; height: 32px; }
+}
+
+.media-body, .media-left, .media-right {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.media-left, .media>.pull-left {
+    padding-right: 10px;
+}
+
+.media .media-left {
+//  width: 50%;
+}
+.media .media-right {
+  text-align: right;
+  width: 45%;
+}
+
+.balance {
+  text-align: right;
+  vertical-align: middle;
+  .money {
+    margin-bottom: 15px;
+  }
+  .charge-button {
+    display: block;
+    width: 80px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 4px;
+    border: 1px solid rgb(120,120,120);
+    text-align: center;
+  }
+  
+  .charge-button a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+  
+  
+
+//.media-body .name {
+//  font-size: 18px;
+//  color: rgb(18,18,18);
+//  margin-top: 12px;
+//}
+
+.avatar .level {
+    margin-top: 6px;
+    text-align: center;
+}
+
+.merchant-profile {
+  .label-danger {
+      background: #FF6969;
+      color: #8B2523;
+  }
+
+  .media-body .name {
+    color: rgb(18,18,18);
+    font-size: 26px;
+  }
+
+  // 未认证
+  .label-auth-type-0 {
+      background: rgb(230,176,95);
+      color: #8B2523;
+  }
+
+  // 个人认证
+  .label-auth-type-1 {
+      background: rgb(70,121,178);
+      color: #8B2523;
+  }
+
+  // 个体户认证
+  .label-auth-type-2 {
+      background: rgb(118,190,219);
+      color: #8B2523;
+  }
+
+  // 企业认证
+  .label-auth-type-3 {
+      background: #FF6969;
+      color: #8B2523;
+  }
+
+  .account-block {
+    background: rgb(119,119,119);
+    color: #8B2523;
+  }
+
+  .label {
+      display: inline;
+      font-weight: normal;
+      border-radius: 2px;
+      padding: 2px 4px;
+      font-size: 75%;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+  //    border-radius: .25em;
+  }
+}
+
+a.member_link, .table_actions a {
+  padding: 5px 10px;
+  border: 1px solid;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.table_actions a {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.redactor-box {
+  width: 79.9%;
+  margin-left: 20%;
+}
+
+.info-item-body {
+  img {
+    max-width: 100%;
+  }
+}
+
+.stat-table {
+  td,th {
+    text-align: center;
+  }
+  td {
+    font-size: 28px;
+//    font-weight: bold;
+  }
+}
+
+.event-body {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 0 3px #888;
+  background-color: white;
+  img {
+    display: block;
+    max-width: 100%;
+    margin: 2px auto;
+    width: 100%;
+  }
+  
+  .grab-tip {
+    color: red;
+  }
+  
+  .question {
+    font-size: 16px;
+    font-weight: normal;
+  }
+  
+  .title {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+//    margin: 10px 0;
+  }
+  .stats {
+    margin-bottom: 15px;
+    clear: both;
+    
+    .like-btn {
+      float: right;
+      margin-top: 3px;
+    }
+  }
+  
+  .grab-btn {
+    margin-top: 30px;
+  }
+  
+  .user-info-d {
+    height: 65px;
+    margin-bottom: 15px;
+    clear: both;
+    margin-left: -15px;
+    margin-right: -15px;
+    border-bottom: 1px solid #ddd;
+//    background-color: red;
+//    text-align: left;
+
+    .avatar {
+//      float: left;
+      width: 50px;
+      height: 50px;
+      margin-left: 15px;
+      float: left;
+    }
+    
+    .nickname {
+      float: left;
+      margin-left: 10px;
+      margin-top: 15px;
+    }
+  }
+}
+
+.tmp-title {
+  height: 37px;
+  line-height: 37px;
+  clear: right;
+}
+.send_message_btn_container {
+  float: right;
+}
+
+.graph-box {
+  margin-bottom: 30px;
+  h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+  }
+}
+
+
+// 转盘抽奖
+#ww_page { 
+  overflow:hidden; width:100%;
+}
+
+#ww_rotate { 
+  position: relative; margin: 0 auto; width:640px; height:640px; 
+}
+
+#ww_plate { 
+  position: absolute; 
+  top:0; 
+  left:0; 
+  width:640px; 
+  height:640px; 
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%; 
+  transition: none;
+}
+
+#ww_arrow{
+  position:absolute; 
+  top:205px; 
+  left:50%; 
+  z-index: 10;
+  margin-left: -75px;
+  width:150px;
+  height:190px; 
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer; 
+}

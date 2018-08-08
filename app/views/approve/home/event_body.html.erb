@@ -1,0 +1,18 @@
+<div class="event-body">
+  <h2 class="title"><%= @event.title %></h2>
+  <p class="stats">人气 <%= @event.view_count %>，点赞 <%= @event.likes_count %><span class="like-btn"><a href="#" class="btn btn-xs btn-success">点赞一下</a></span></p>
+  <p class="user-info-d">
+    <% if @event.ownerable.try(:real_avatar_url) %>
+    <%= image_tag @event.ownerable.try(:real_avatar_url), class: 'img-circle avatar' %>
+    <% else %>
+    <%= user_avatar_tag(@event.ownerable, :big, 'img-circle avatar') %>
+    <% end %>
+    <span class="nickname">
+      <%= @event.ownerable.try(:format_nickname) %>
+    </span>
+  </p>
+  <div class="body">
+    <%= simple_format @event.body %>
+  </div>
+  <div class="report">如果发现内容不实，欢迎 <a href="#" class="btn btn-danger btn-xs">举报</a></div>
+</div>

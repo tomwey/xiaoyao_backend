@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= render_page_title %>
+  <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+  <!-- non responsive -->
+  <%= stylesheet_link_tag 'base' %>
+  <%= stylesheet_link_tag  'portal', media: 'all', id: "maincss" %>
+  
+  <link rel="shortcut icon" href="<%= asset_path("favicon.ico") %>" />
+  
+  <%= yield :styles %>
+  
+  <%= csrf_meta_tags %>
+  
+</head>
+<body>
+  <div class="wrapper">
+    <!-- top navbar -->
+    <header class="topnavbar-wrapper">
+      <%= render 'layouts/topnavbar' %>
+    </header>
+    
+    <!-- sidebar -->
+    <aside class="aside">
+      <%= render 'layouts/sidebar' %>
+    </aside>
+    
+    <!-- offsidebar -->
+    <aside class="offsidebar hide">
+      <%= render 'layouts/offsidebar' %>
+    </aside>
+    
+    <!-- Main section -->
+    <section>
+      <!-- Page content -->
+      <div class="content-wrapper">
+        <%= yield %>
+      </div>
+    </section>
+    
+    <!-- Page footer -->
+    <footer>
+      <%= render 'layouts/footer' %>
+    </footer>
+  </div>
+  
+  <%= javascript_include_tag 'base' %>
+  
+  <%= javascript_include_tag 'portal' %>
+  <%= yield :scripts %>
+</body>
+</html>

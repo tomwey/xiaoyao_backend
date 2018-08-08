@@ -1,0 +1,15 @@
+<table class="table">
+  <% results.each do |item| %>
+  <tr>
+    <td width="18%">
+      <img src="<%= item.user.real_avatar_url %>" class="img-circle" style="width:32px;height:32px;">
+    </td>
+    <td>
+      <span style="color: red;"><%= item.user.format_nickname %></span>
+      抽中
+      <span style="color: red;"><%= item.prize.name %></span>
+    </td>
+    <td width="28%"><%= l item.created_at, format: :short %></td>
+  </tr>
+  <% end %>
+</table>

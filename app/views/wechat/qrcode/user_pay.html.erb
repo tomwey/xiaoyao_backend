@@ -1,0 +1,62 @@
+<div class="card-detail">
+
+  <div class="qrcode box">
+    <p class="qrcode-desc">商家扫码，完成抵扣</p>
+    <h2 class="pay-money">¥ <%= '%.2f' % @user_pay.money %></h2>
+    <%= image_tag "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=#{@user_pay.qrcode_ticket}", class: 'qrcode-image' %>
+  </div>
+
+</div>
+
+<div class="qrcode-result-modal" id="pay-qrcode-result-modal">
+  <div class="result center-box" id="pay-qrcode-result"></div>
+</div>
+
+<% content_for :scripts do %>
+
+<script>
+var yunba;
+
+function initYunba() {
+  yunba = new Yunba({server: 'sock.yunba.io', port: 3000, appkey: '59a618093fccc1b73b711c97'});
+  yunba.init(function (success) {
+    if (success) {
+      yunba.connect_by_customid('<%= @user_pay.user.uid %>', function (success, msg, sessionid) 
+      {
+          if (success) {
+              // console.log('你已成功连接到消息服务器，会话ID：' + sessionid);
+              var topic = '<%= @user_pay.uniq_id %>';
+              yunba.subscribe({'topic': topic}, 
+                  function (success, msg) {
+                      if (success) {
+                          // console.log('你已成功订阅频道');
+                      } else {
+                          // console.log(msg);
+                      }
+                  }
+              );
+              
+              yunba.set_message_cb(function (data) {
+                if (data.topic === topic) 
+                {
+                  var msg = data.msg;
+                  $('#pay-qrcode-result').html(msg);
+                  $('#pay-qrcode-result-modal').show();
+                  setTimeout(() => {
+                    $('#pay-qrcode-result-modal').hide()
+                  }, 3000);
+                }
+              });
+              
+          } else {
+              // console.log(msg);
+          }
+      });
+    }
+  });
+}
+  
+initYunba();
+</script>
+
+<% end %>

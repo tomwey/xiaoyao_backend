@@ -1,0 +1,35 @@
+<div class="box">
+  即将上线，尽情期待...
+</div>
+
+<!-- <% content_for :scripts do %>
+<script>
+
+  App.wxConfig({
+    debug: <%= @sign_package[:debug] %>,
+    appId: '<%= @sign_package[:appId] %>',
+    timestamp: <%= @sign_package[:timestamp] %>,
+    nonceStr: '<%= @sign_package[:nonceStr] %>',
+    signature: '<%= @sign_package[:signature] %>',
+    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone','openLocation','getLocation']
+  }, function(res) {
+    // console.log(res);
+    App.wxShare({
+      title: '<%= @share_title %>',
+      desc: '<%= @share_desc %>',
+      link: '<%= request.original_url %>',
+      img_url: '<%= @share_image_url %>',
+    }, function(res) {
+      // 成功sendShareStat
+      
+    }, function() {
+      // 取消
+    }, function(error) {
+      // 失败
+    });
+  }, function(error) {
+    // console.log(error);
+  });
+
+</script>
+<% end %> -->

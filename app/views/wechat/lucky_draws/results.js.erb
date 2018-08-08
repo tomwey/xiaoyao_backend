@@ -1,0 +1,10 @@
+<% if @error_msg %>
+$('#cl-result .modal-body').html('数据加载失败！');
+<% else %>
+
+<% if @results.blank? or @results.empty? %>
+$('#cl-result .modal-body').html('暂无数据');
+<% else %>
+$('#cl-result .modal-body').html('<%= j render 'wechat/lucky_draws/results', results: @results %>');
+<% end %>
+<% end %>

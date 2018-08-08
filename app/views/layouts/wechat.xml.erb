@@ -1,0 +1,7 @@
+<xml>
+  <ToUserName><![CDATA[<%= weixin_xml.from_user %>]]></ToUserName>
+  <FromUserName><![CDATA[<%= weixin_xml.to_user %>]]></FromUserName>
+  <CreateTime><%= Time.now.to_i %></CreateTime>
+  <%= yield %>
+  <FuncFlag>0</FuncFlag>
+</xml>

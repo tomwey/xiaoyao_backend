@@ -1,0 +1,118 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$theme-red: rgb(187,64,42);
+$golden: rgb(228,196,129);
+
+body {
+  background-color: white;
+}
+
+img {
+  max-width: 100%;
+}
+
+p, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.center-box {
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  text-align: center;
+}
+
+.card-detail {
+  padding: 20px;
+  font-size: 1.5rem;
+  .body {
+    text-align: left;
+  }
+}
+
+.box {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  h2 {
+    font-size: 2rem;
+    color: rgb(58,58,58);
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: rgb(120,120,120);
+  }
+}
+
+.user-card {
+  
+  width: 100%;
+  
+  position: relative;
+  
+  img {
+    width: 100%;
+  }
+  .expire-time {
+    position: absolute;
+    
+    bottom: 6.5%;
+    right: 4.8%;
+    color: rgb(58,58,58);
+  }
+  
+}
+
+.qrcode {
+  .qrcode-image {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+  }
+  .qrcode-desc {
+    color: rgb(120,120,120);
+    margin-bottom: 15px;
+  }
+  
+  .pay-money {
+    font-weight: normal;
+    font-size: 1.8rem;
+    color: rgb(58,58,58);
+  }
+}
+
+.qrcode-result-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 99999;
+  display: none;
+
+  .result {
+    width: 70%;
+    padding: 0 10px;
+    height: 58px;
+    color: white;
+    border-radius: 8px;
+    background-color: $theme-red;
+    margin: auto;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    
+//    overflow: auto;
+  }
+}
+

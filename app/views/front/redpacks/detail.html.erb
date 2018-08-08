@@ -1,0 +1,47 @@
+<a class="redpack-box" style="background-image:url(<%= @img_url %>)" 
+  data-id="<%= @redpack.uniq_id %>" 
+  data-user="<%= current_user.private_token %>" 
+  data-sign="<%= @redpack.sign.empty? ? '0' : '1' %>"
+  data-loading="0"
+  onclick="App.takeRedpack(this);">
+  
+</a>
+<% if @redpack.bg_audio %>
+<audio src="<%= @redpack.bg_audio %>" autoplay></audio>
+<% end %>
+
+<% if @redpack.sign.any? %>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block; padding-right: 15px;">
+  <div class="modal-dialog">
+    <div class="modal-content" style="overflow: hidden;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">输入口令领红包</h4>
+      </div>
+      <div class="modal-body" style="max-height: 80px; overflow-y: auto;">
+        <p>
+          <input type="text" placeholder="输入口令" id="sign-input-control" class="form-control">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-danger"   
+          data-id="<%= @redpack.uniq_id %>" 
+          data-user="<%= current_user.private_token %>" 
+          data-loading="0" 
+          onclick="App.takeSignRedpack(this);" >领红包</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+  $(document).ready(function() {
+    App.viewRedpack();
+  });
+</script>
+<% end %>

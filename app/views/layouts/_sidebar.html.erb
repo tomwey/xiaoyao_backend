@@ -1,0 +1,143 @@
+<!-- START Sidebar (left)-->
+<div class="aside-inner">
+   <nav class="sidebar" data-sidebar-anyclick-close="">
+      <!-- START sidebar nav-->
+      <ul class="nav">
+         <!-- START user info-->
+         <li class="has-user-block">
+            <div id="user-block" class=""> <!-- class="collapse" -->
+               <div class="item user-block">
+                  <!-- User picture-->
+                  <div class="user-block-picture">
+                     <div class="user-block-status">
+                        <img src="<%= image_path('avatar/big.png') %>" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
+                        <div class="circle circle-success circle-lg"></div>
+                     </div>
+                  </div>
+                  <!-- Name and Job-->
+                  <div class="user-block-info">
+                     <span class="user-block-name">您好,</span>
+                     <span class="user-block-role"><%= current_user.name %></span>
+                  </div>
+               </div>
+            </div>
+         </li>
+         <!-- END user info-->
+         <!-- Iterates over all sidebar items-->
+         <li class="nav-heading">
+            <span>功能导航</span>
+         </li>
+         <li class="<%= 'active' if controller?('home') && action?('index') %>">
+            <a href="<%= portal_root_path %>" title="控制面板">
+               <!-- div class="label label-success pull-right">30</div -->
+               <em class="icon-speedometer"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">控制面板</span>
+            </a>
+         </li>
+         
+         <!-- 广告管理 -->
+         <li class="<%= 'active' if controller?('ad') && action?('index') %>">
+            <a href="#ad" title="广告管理" data-toggle="collapse">
+               <em class="icon-layers"></em>
+               <span>广告管理</span>
+            </a>
+            <ul id="ad" class="nav sidebar-subnav collapse">
+               <li class="sidebar-subnav-header">新建广告</li>
+               <li>
+                  <a href="/dashboard/dashboard_h" title="Dashboard Horizontal">
+                     <span>新建广告</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="/dashboard/dashboard_h" title="Dashboard Horizontal">
+                     <span>广告列表</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+         
+         <!-- 红包管理 -->
+         <li class="<%= 'active' if controller?('ad') && action?('index') %>">
+            <a href="#hongbao" title="广告管理" data-toggle="collapse">
+               <em class="icon-layers"></em>
+               <span>红包管理</span>
+            </a>
+            <ul id="hongbao" class="nav sidebar-subnav collapse">
+               <li class="sidebar-subnav-header">新建红包</li>
+               <li>
+                  <a href="/dashboard/dashboard_h" title="Dashboard Horizontal">
+                     <span>新建红包</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="/dashboard/dashboard_h" title="Dashboard Horizontal">
+                     <span>红包列表</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+         
+         <!-- 认证管理 -->
+         <li class="<%= 'active' if controller?('ad') && action?('index') %>">
+            <a href="#auth" title="广告管理" data-toggle="collapse">
+               <em class="icon-layers"></em>
+               <span>认证管理</span>
+            </a>
+            <ul id="auth" class="nav sidebar-subnav collapse">
+               <li class="sidebar-subnav-header"></li>
+               <li>
+                  <a href="/dashboard/dashboard_h" title="Dashboard Horizontal">
+                     <span>认证类型</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="/dashboard/dashboard_h" title="Dashboard Horizontal">
+                     <span>个人实名认证</span>
+                  </a>
+               </li>
+               <li>
+                  <a href="/dashboard/dashboard_h" title="Dashboard Horizontal">
+                     <span>企业认证</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+         
+         
+         <li class="nav-heading">
+            <span>商家中心</span>
+         </li>
+         
+         <li class="<%= 'active' if controller?('merchants') && action?('profile') %>">
+            <a href="<%= portal_root_path %>" title="商家资料">
+               <!-- div class="label label-success pull-right">30</div -->
+               <em class="icon-speedometer"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">商家资料</span>
+            </a>
+         </li>
+         <li class="<%= 'active' if controller?('merchants') && action?('index') %>">
+            <a href="<%= portal_root_path %>" title="商家资料">
+               <!-- div class="label label-success pull-right">30</div -->
+               <em class="icon-speedometer"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">商家资料</span>
+            </a>
+         </li>
+         <li class="<%= 'active' if controller?('merchants') && action?('index') %>">
+            <a href="<%= portal_root_path %>" title="充值">
+               <!-- div class="label label-success pull-right">30</div -->
+               <em class="icon-speedometer"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">充值</span>
+            </a>
+         </li>
+         <li class="<%= 'active' if controller?('merchants') && action?('index') %>">
+            <a href="<%= portal_root_path %>" title="设置">
+               <!-- div class="label label-success pull-right">30</div -->
+               <em class="icon-speedometer"></em>
+               <span data-localize="sidebar.nav.DASHBOARD">设置</span>
+            </a>
+         </li>
+      </ul>
+      <!-- END sidebar nav-->
+   </nav>
+</div>
+<!-- END Sidebar (left)-->

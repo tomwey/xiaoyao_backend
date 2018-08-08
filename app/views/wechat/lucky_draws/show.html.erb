@@ -1,0 +1,132 @@
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-content">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="left-item topbar-item">
+            <a onclick="App.showCJDesc();">抽奖说明</a>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="right-item topbar-item">
+            <a onclick="App.showCJResult(this);" data-code="<%= @i %>" data-key="<%= @ak %>" data-id="<%= @lucky_draw.uniq_id %>">抽奖结果</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cj-result" id="cj-result">
+  <% if @log.blank? %>
+  点击抽奖按钮，开始抽奖
+  <% else %>
+  抽奖结果：<%= @log.prize.try(:name) %>
+  <% end %>
+</div>
+<div class="cj-container">
+  <div class="cj-rotate">
+    <%= image_tag @lucky_draw.plate_image.url, class: 'plate-image' %>
+    <img src="<%= @lucky_draw.arrow_image.url %>" class="arrow-image" onclick="App.startCJ(this);" data-loading="0" data-uid="<%= current_user.uid %>" data-has-prized="<%= @log.blank? ? false : true %>" data-id="<%= @lucky_draw.uniq_id %>">
+  </div>
+</div>
+
+<!-- 抽奖说明 -->
+<div class="modal fade" id="cl-desc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">抽奖说明</h4>
+      </div>
+      <div class="modal-body">
+        <%= raw @lucky_draw.prize_desc %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 抽奖结果 -->
+<div class="modal fade" id="cl-result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel2">抽奖结果</h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% content_for :scripts do %>
+
+<script>
+var yunba;
+
+function initYunba() {
+  yunba = new Yunba({server: 'sock.yunba.io', port: 3000, appkey: '59a618093fccc1b73b711c97'});
+  yunba.init(function (success) {
+    if (success) {
+      console.log('<%= current_user.uid %>');
+      yunba.connect_by_customid('<%= current_user.uid %>', function (success, msg, sessionid) 
+      {
+          if (success) {
+              // console.log('你已成功连接到消息服务器，会话ID：' + sessionid);
+              var topic = '<%= @lucky_draw.uniq_id %>';
+              yunba.subscribe({'topic': topic}, 
+                  function (success, msg) {
+                      if (success) {
+                          console.log('你已成功订阅频道：<%= @lucky_draw.uniq_id %>');
+                      } else {
+                          console.log(msg);
+                      }
+                  }
+              );
+              
+              yunba.set_message_cb(function (data) {
+                if (data.topic === topic) 
+                {
+                  var msg = data.msg;
+                  var uid = msg.substr(-8);
+                  var realMsg = msg.substr(0, msg.length - 8);
+                  
+                  // console.log(msg + ':' + uid + ':' + realMsg);
+                  
+                  if (uid !== $('.cj-rotate .arrow-image').data('uid').toString()) {
+                    $.toast({
+                        hideAfter: 5000,
+                        loader: false,
+                        text: realMsg,
+                        position: 'top-center',
+                        textAlign: 'center',
+                    });
+                  }
+                }
+              });
+              
+          } else {
+              console.log(msg);
+          }
+      });
+    }
+  });
+}
+  
+initYunba();
+</script>
+
+<script>
+
+App.getLocation((res) => {
+  // alert(JSON.stringify(res));
+  $('#arrow-container').data('loc', res.lng.toString() + ',' + res.lat.toString());
+}, (error) => {
+  // alert(error);
+});
+
+</script>
+
+<% end %>

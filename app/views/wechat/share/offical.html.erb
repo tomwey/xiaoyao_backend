@@ -1,0 +1,67 @@
+<div class="wx-share-topbar">
+  <table>
+    <tr>
+      <td class="icon-header">
+        <%= user_avatar_tag @user, :large, 'img-circle' %>
+      </td>
+      <td>
+        <div class="wx-prentice">
+          <p>我是（ID：<%= @user.uid %>），我正在玩小优大惠，邀请你一起来抢红包！完全免费！</p>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="promoto-box">
+  <%= image_tag 'qrcode.png', class: 'qrcode-img' %>
+  <div class="qrcode-follow-tip">
+    长按识别二维码关注，抢更多红包！
+  </div>
+</div>
+
+<div class="rank">
+  <div class="container">
+    <!-- 排行榜前三的用户 -->
+    <div class="top-3-earn-users panel panel-default">
+      <div class="panel-heading user-rank-header">
+        排行榜前三名
+      </div>
+      <div class="panel-body">
+        <table>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user_avatar_tag user, :large, 'img-circle' %></td>
+            <td class="user-info">
+              <p class="user-name"><%= user.format_nickname.blank? ? '匿名用户' : user.format_nickname %></p>
+              <p class="earn-info">共抢<span class="digit"><%= user.earn %></span>元</p>
+            </td>
+          </tr>
+        <% end %>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 最新的10条抢红包记录 -->
+    <div class="latest-10-earn-history">
+      <% @earn_logs.each do |log| %>
+      <div class="earn-item clearfix">
+        <div class="user-avatar">
+          <%= user_avatar_tag log.user, :large, 'img-circle' %>
+        </div>
+        <div class="earn-log-info">
+          <p class="user-name"><%= log.user.try(:format_nickname).blank? ? '匿名用户' : log.user.try(:format_nickname) %></p>
+          <p class="earn-time"><%= time_ago_in_words(log.created_at) %>前</p>
+          <p class="common-text earn-detail">
+            完成：<span class="event-name"><%= log.event.try(:title) %></span> 抢红包，获得<span class="money"><%= log.money %></span>元
+          </p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    
+  </div>
+</div>
+
+
+

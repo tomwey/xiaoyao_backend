@@ -1,0 +1,21 @@
+<% if @success %>
+
+$('.plate-image').stopRotate();
+$('.plate-image').rotate({
+    angle: 0,//旋转的角度数
+    duration: 5000, //旋转时间
+    animateTo: <%= @prize.angle %>, //给定的角度,让它根据得出来的结果加上1440度旋转
+    callback: function() {
+      // alert('抽中：' + '<%= @prize.name %>');
+      $('#cj-result').html('抽奖结果：' + '<%= @prize.name %>');
+      
+      $('.cj-rotate .arrow-image').data("loading", '0');
+      $('.cj-rotate .arrow-image').data("has-prized", 'true');
+    }
+});
+
+<% else %>
+$('.cj-rotate .arrow-image').data("loading", '0');
+$('#cj-result').html('<%= @error_msg %>');
+//alert('<%= @error_msg %>');
+<% end %>

@@ -1,0 +1,28 @@
+<%= semantic_form_for @redbag, url: republish_cpanel_redbag_path, method: :put do |f| %>
+
+    <%= f.inputs :name => "广告红包信息" do %>      
+       <%= f.input :_type, as: :select, collection: [['随机红包', 0], ['固定红包', 1]], prompt: '-- 选择红包类型 --', required: true, input_html: { style: 'width: 280px;' } %>
+       <%= f.input :f_total_money, as: :number, label: '总金额', required: true %>
+      <%= f.input :f_min_value, as: :number, label: '最小金额', required: true %>
+      <%= f.input :f_max_value, as: :number, label: '最大金额', required: true %>
+      <%= f.input :f_total, as: :number, required: true, label: '红包个数'%>
+      <%= f.input :f_value, as: :number, required: true, label: '单个红包金额' %>
+    <% end %>
+    
+    <% if @redbag.share_hb %>
+    <%= f.inputs :name => "分享红包信息 [#{@redbag.share_hb.sent_money} / #{@redbag.share_hb.total_money} (#{@redbag.share_hb.min_value}-#{@redbag.share_hb.max_value})]", :for => @redbag.share_hb || Redbag.new do |s_form| %>
+      <%= s_form.input :_type, as: :select, collection: [['随机红包', 0], ['固定红包', 1]], prompt: '-- 选择红包类型 --', required: true, input_html: { style: 'width: 280px;' } %>
+      <%= s_form.input :f_total_money, as: :number, label: '总金额', required: true %>
+      <%= s_form.input :f_min_value, as: :number, label: '最小金额', required: true %>
+      <%= s_form.input :f_max_value, as: :number, label: '最大金额', required: true %>
+      <%= s_form.input :f_total, as: :number, required: true, label: '红包个数'%>
+      <%= s_form.input :f_value, as: :number, required: true, label: '单个红包金额' %>
+    <% end %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.action :submit, :as => :button %>
+      <%= f.action :cancel, :as => :link, class: 'btn' %>
+    <% end %>
+
+  <% end %>

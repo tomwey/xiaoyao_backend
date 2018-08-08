@@ -1,0 +1,62 @@
+ <% 
+ 
+ @today = Time.zone.now
+ @one_month_ago = @today - 1.month
+ 
+ # @users = User.where(created_at: @one_month_ago.beginning_of_day..@today.end_of_day).group_by(&:group_by_date).map { |k,v| [k, v.length] }.sort
+
+ @subscribe_users = WechatProfile.where(subscribe_time: @one_month_ago.beginning_of_day.to_i..@today.end_of_day.to_i)
+   .where('subscribe_time is not null and unsubscribe_time is null')
+   .group_by(&:group_by_subscribe_date).map { |k,v| [k, v.length] }.sort
+   
+ # @unsubscribe_users = WechatProfile.where(created_at: @one_month_ago.beginning_of_day..@today.end_of_day)
+ #     .where('unsubscribe_time is not null')
+ #     .group_by(&:group_by_unsubscribe_date).map { |k,v| [k, v.length] }.sort
+
+ labels = []
+ subscribe_values = []
+
+ @subscribe_users.each do |su|
+   labels << { label: su[0] }
+   subscribe_values << { value: su[1] }
+ end
+ 
+ @chart = Fusioncharts::Chart.new({
+            height: '400',
+            width: '100%',
+            type: 'msline',
+            renderAt: 'user-chart-container',
+            dataSource: {
+              chart: {
+                         caption: '近一个月关注用户统计',
+                         subCaption: '',
+                         linethickness: "2",
+                         numberPrefix: "",
+                         showvalues: "0",
+                         formatnumberscale: "1",
+                         labeldisplay: "ROTATE",
+                         slantlabels: "1",
+                         divLineAlpha: "40",
+                         anchoralpha: "0",
+                         animation: "1",
+                         legendborderalpha: "20",
+                         drawCrossLine: "1",
+                         crossLineColor: "#0d0d0d",
+                         crossLineAlpha: "100",
+                         tooltipGrayOutColor: "#80bfff",
+                         theme: "zune"
+                       },
+               categories: [{
+                 category: labels
+               }],
+               dataset: [
+                 {
+                   seriesname: '关注用户',
+                   data: subscribe_values
+                 },
+             ],
+            }
+          })
+  %>           
+
+<div id="user-chart-container"><%= @chart.render() %></div>

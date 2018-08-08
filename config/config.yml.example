@@ -1,0 +1,15 @@
+defaults: &defaults
+  app_name: "水果社"
+  domain: "127.0.0.1:3000"
+  admin_emails:
+    - "admin@admin.com"
+  email_sender: 'noreply@shuiguoshe.com'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

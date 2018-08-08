@@ -1,0 +1,15 @@
+<div class="graph-box user-sessions">
+  <h2>会话统计</h2>
+  <%= line_chart [{name: '用户会话', data: UserSession.group_by_day(:created_at).count},
+                  {name: '活跃用户', data: UserSession.select('distinct user_id').group_by_day(:created_at).count}] %>
+</div>
+
+<div class="graph-box users">
+  <h2>用户注册</h2>
+  <%= line_chart User.group_by_day(:created_at).count %>
+</div>
+
+<div class="graph-box earn-logs">
+  <h2>用户抢红包统计</h2>
+  <%= line_chart [{name: '抢红包次数', data: RedbagEarnLog.group_by_day(:created_at).count}, {name: '抢红包金额', data: RedbagEarnLog.group_by_day(:created_at).sum(:money)}] %>
+</div>

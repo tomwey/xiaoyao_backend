@@ -1,0 +1,330 @@
+"zh-CN":
+  common:
+    super_admin: '管理员'
+    admin: '管理员'
+    site_editor: '站点编辑'
+    marketer: '市场人员'
+    limited_user: '普通管理员'
+    approved: '已审核'
+    rejected: '已拒绝'
+    pending: '待审核'
+    progressing: '进行中'
+    canceled: '已取消'
+    completed: '已结束'
+    grab_tip: '无'
+    open: '打开'
+    close: '关闭'
+    # SignRule:
+    #   title: '口令红包'
+    #   grab_tip: '注意：只有一次答题的机会！'
+    #   action: '提交口令抢红包'
+  activerecord:
+    models:
+      user: "用户"
+      auth_profile: '用户登录信息'
+      user_session: '用户会话'
+      user_device: '用户设备'
+      admin: "管理员"
+      cpanel: '后台系统' # 此处并不存在真正意义的model，只是为了后台系统的面包屑导航根地址国际化成中文
+      banner: '广告'
+      site_config: "站点配置"
+      page: '网页文档'
+      merchant: '商家'
+      common_config: '系统设置'
+      game_config: '游戏配置'
+      withdraw: '提现'
+      charge: '充值'
+      trade_log: '交易记录'
+      page: '网页'
+      attachment: '附件'
+      message_template: '消息模板'
+      message: '消息'
+      admin_user: '登录账号'
+      recharge: '充值'
+      pay_log: '交易明细'
+      area: '区域'
+      performer: '艺人'
+      catalog: '分类'
+      media: '作品'
+      vote: '投票'
+      vote_item: '投票选项'
+      user_vote_log: '用户投票记录'
+    attributes:
+      user:
+        uid: 'ID'
+        mobile: '手机'
+        nickname: '昵称'
+        avatar: '头像'
+        bio: '简介'
+        wx_id: '微信ID'
+        wx_avatar: '微信头像'
+        balance: '余额'
+        earn: '总收入'
+        private_token: 'TOKEN'
+        verified: '是否有效'
+        created_at: '注册时间'
+        total_prize_count: '抽奖总次数'
+        prized_count: '抽过的次数'
+      auth_profile:
+        openid: 'OPENID'
+        provider: '平台方'
+        nickname: '昵称'
+        sex: '性别'
+        headimgurl: '头像'
+        unionid: 'UNIONID'
+        access_token: 'ACCESS TOKEN'
+        refresh_token: 'REFRESH TOKEN'
+        city: '城市'
+        language: '语言'
+        country: '国家'
+        province: '省份'
+      message:
+        message_template_id: '所属模板'
+        content: '内容'
+        link: '消息链接地址'
+        to_users: '消息接收人'
+      banner:
+        image: '封面图'
+        link: '链接地址'
+        sort: '显示顺序'
+        opened: '是否上线'
+      message_template:
+        tpl_id: '模板ID'
+        title: '标题'
+        body: '内容'
+        body_demo: '使用示例'
+        opened: '是否使用'
+      page:
+        title: '标题'
+        body:  '内容'
+        slug:  '文档标识'
+      common_config:
+        key: '配置名'
+        value: '配置值'
+        description: '配置说明'
+      job:
+        uniq_id: 'ID'
+        title: '标题'
+        body: '详细介绍'
+        company: '所属公司'
+        price: '兼职价格'
+        work_start_date: '工作开始日期'
+        work_end_date: '工作结束日期'
+        work_length: '工期'
+        opened: '是否上架'
+        sort: '显示顺序'
+        created_at: '创建时间'
+        updated_at: '更新时间'
+      job_task:
+        content: '任务内容'
+        job_id: '分配兼职'
+        agent_user_id: '所属代理'
+      agent_user:
+        uniq_id: 'ID'
+        name: '代理人名字'
+        mobile: '代理人手机'
+        address: '代理人地址'
+        parent_id: '父级代理人'
+        level: '代理人级别'
+        source: '来源'
+        star: '活跃程度'
+        parent: '上级代理'
+        balance: '余额'
+        earnings: '总收入'
+        earn_ratio: '收入提成比例配置'
+        blocked_at: '禁用时间'
+        note: '备注'
+        created_at: '创建时间'
+        updated_at: '更新时间'
+      agent_config:
+        key: '配置名称'
+        value: '配置值'
+        description: '配置说明'
+      agent_earn_bill:
+        uniq_id: 'ID'
+        agent_user_id: '所属代理商'
+        money: '提成金额'
+        earn_ratio: '提成比例'
+        from_agent_user_id: '下级代理商'
+        uid: '用户ID'
+        created_at: '创建时间'
+      attachment:
+        data: '文件'
+        uniq_id: 'ID'
+      message:
+        title: '标题'
+        content: '内容'
+        to: '用户'
+        read_at: '已读时间'
+        created_at: '创建时间'
+      
+      withdraw:
+        oid: '流水号'
+        money: '金额'
+        fee: '手续费'
+        account_no: '账号'
+        account_name: '提现人'
+        user_id: '所属用户'
+        payed_at: '支付时间'
+      charge:
+        uniq_id: '流水号'
+        money: '金额'
+        user_id: '所属用户'
+        payed_at: '到账时间'
+        ip: 'IP'
+      trade_log: 
+        user_id: '用户'
+        created_at: '交易时间'
+        money: '金额'
+        title: '交易说明'
+        tradeable: '交易对象'
+        
+      site_config:
+        key: "配置名称"
+        value: "配置值"
+        description: "配置说明"
+      admin:
+        email: "邮箱"
+        password: "密码"
+        current_password: "旧密码"
+        password_confirmation: "确认密码"
+        current_sign_in_at: "最新登录时间"
+        sign_in_count: "登录次数"
+        created_at: "创建时间"
+        role: "角色"
+      merchant:
+        name: '名称'
+        mobile: '联系电话'
+        address: '地址'
+        note: '备注'
+        avatar: '头像'
+        intro: '简介'
+        auth_type: '认证方式'
+        verified: '是否有效'
+        password: '密码'
+        password_confirmation: '确认密码'
+        login_in_count: '登录次数'
+      media_history:
+        title: '资源名字'
+        source_url: '资源地址'
+        progress: '进度'
+        uniq_id: 'ID'
+        uid: '用户'
+        mp_id: '提供者'
+        created_at: 'at'
+      page:
+        title: '标题'
+        body:  '内容'
+        slug:  '文档标识'
+      admin_user:
+        email: '邮箱'
+        password: '密码'
+        password_confirmation: '确认密码'
+        current_sign_in_at: '最新登录时间'
+        sign_in_count: '登录次数'
+        created_at: '创建时间'
+      area:
+        address: '详细地址'
+        location: '位置坐标'
+        range: '限制范围'
+      performer:
+        name: '名字'
+        mobile: '手机'
+        avatar: '头像'
+        uniq_id: 'ID'
+        _type: '艺人类型'
+        private_token: 'TOKEN'
+        verified: '账号是否可用'
+        school: '学校'
+        bio: '个人简介'
+        birth: '生日'
+        height: '身高'
+        weight: '体重'
+      catalog:
+        name: '名称'
+        sort: '显示顺序'
+        opened: '是否使用'
+      media:
+        _type: '作品类型'
+        title: '标题'
+        summary: '描述'
+        cover: '封面图'
+        file: '播放文件'
+        duration: '播放时长'
+        owner_id: '所属艺人'
+        opened: '是否上线'
+        sort: '显示顺序'
+      vote:
+        uniq_id: 'ID'
+        title: '标题'
+        body: '内容'
+        body_url: '内容地址'
+        expired_at: '截止时间'
+        opened: '是否启用'
+        _type: '投票类型'
+        vote_count: '总投票数'
+        sort: '显示顺序'
+        video: '投票简介视频'
+        view_count: '阅读量'
+      vote_item:
+        vote_id: '所属投票'
+        performer_id: '候选艺人'
+        vote_count: '得票数'
+        sort: '显示顺序'
+        video: '投票视频介绍'
+        opened: '是否启用该选项'
+        body: '投票文本介绍'
+    errors:
+      models:
+        user: "用户"
+        admin: "管理员"
+        category: "类别"
+      messages:
+        inclusion: "不包含于列表中"
+        exclusion: "是保留关键字"
+        invalid: "是无效的"
+        confirmation: "与确认值不匹配"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能为空字符"
+        too_long: "过长（最长为 %{count} 个字符）"
+        too_short: "过短（最短为 %{count} 个字符）"
+        wrong_length: "长度非法（必须为 %{count} 个字符）"
+        taken: "已经被使用"
+        not_a_number: "不是数字"
+        not_an_integer: "必须是整数"
+        greater_than: "必须大于 %{count}"
+        greater_than_or_equal_to: "必须大于或等于 %{count}"
+        equal_to: "必须等于 %{count}"
+        less_than: "必须小于 %{count}"
+        less_than_or_equal_to: "必须小于或等于 %{count}"
+        odd: "必须为单数"
+        even: "必须为双数"
+        record_invalid: "校验失败: %{errors}"
+        taken:
+          已占用
+        document_not_found:
+          没有发现类是 %{klass} ID 是 %{identifiers} 的文档
+        invalid_database:
+          数据库应该是Mongo::DB,而不是%{name}.
+        invalid_type:
+          在类%{klass}中定义了字段,实际值是%{value}的%{other}.
+        unsupported_version:
+          MongoDB %{version} 版本已过期，请升级到 %{mongo_version}.
+        validations:
+          校验失败 - %{errors}.
+        invalid_collection:
+          不允许直接访问嵌入式的集合%{klass} , 请从文档的根访问集合.
+        invalid_field:
+          字段的名字不允许为 %{name}. 你不应该定义跟Mongoid内部属性或者方法相同的名字，详细请看Use Document#instance_methods.
+        too_many_nested_attribute_records:
+          被关联的%{association} 嵌入式属性不能超过 %{limit}.
+        embedded_in_must_have_inverse_of:
+          embedded_in的关联属性必须包含inverse_of.
+        dependent_only_references_one_or_many:
+          dependent => destroy|delete 选项只有在references_one或者references_many时候有效.
+        association_cant_have_inverse_of:
+          在当前的关联中，不允许定义inverse_of去,其只有在embedded_in或者references_many是数组的情况下使用
+        unsaved_document:
+          You cannot call create or create! through a relational association
+          relation (%{document}) who's parent (%{base}) is not already saved.

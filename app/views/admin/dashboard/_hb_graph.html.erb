@@ -1,0 +1,77 @@
+ <% 
+ 
+ @today = Time.zone.now
+ @one_month_ago = @today - 1.month
+ 
+ @view_log = RedbagViewLog.where(created_at: @one_month_ago.beginning_of_day..@today.end_of_day).group_by(&:group_by_date).map { |k,v| [k, v.length] }.sort
+
+ @earn_log = RedbagEarnLog.where(created_at: @one_month_ago.beginning_of_day..@today.end_of_day).group_by(&:group_by_date).map { |k,v| [k, v.length] }.sort
+ 
+ @share_log = RedbagShareLog.where(created_at: @one_month_ago.beginning_of_day..@today.end_of_day).group_by(&:group_by_date).map { |k,v| [k, v.length] }.sort
+
+ labels = []
+ 
+ view_values = []
+ earn_values = []
+ share_values = []
+ 
+ @view_log.each do |item|
+   labels << { label: item[0] }
+   view_values << { value: item[1] }
+ end
+ 
+ @earn_log.each do |su|
+   earn_values << { value: su[1] }
+ end
+ 
+ @share_log.each do |usu|
+   share_values << { value: usu[1] }
+ end
+ 
+ @chart = Fusioncharts::Chart.new({
+            height: '400',
+            width: '100%',
+            type: 'msline',
+            renderAt: 'hb-chart-container',
+            dataSource: {
+              chart: {
+                         caption: '近一个月红包广告统计',
+                         subCaption: '',
+                         linethickness: "2",
+                         numberPrefix: "",
+                         showvalues: "0",
+                         formatnumberscale: "1",
+                         labeldisplay: "ROTATE",
+                         slantlabels: "1",
+                         divLineAlpha: "40",
+                         anchoralpha: "0",
+                         animation: "1",
+                         legendborderalpha: "20",
+                         drawCrossLine: "1",
+                         crossLineColor: "#0d0d0d",
+                         crossLineAlpha: "100",
+                         tooltipGrayOutColor: "#80bfff",
+                         theme: "zune"
+                       },
+               categories: [{
+                 category: labels
+               }],
+               dataset: [
+                 {
+                   seriesname: '浏览数',
+                   data: view_values
+                 },
+                 {
+                   seriesname: '参与数',
+                   data: earn_values
+                 },
+                 {
+                   seriesname: '转发数',
+                   data: share_values
+                 },
+             ],
+            }
+          })
+  %>           
+
+<div id="hb-chart-container"><%= @chart.render() %></div>

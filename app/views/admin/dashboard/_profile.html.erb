@@ -1,0 +1,37 @@
+<div class="merchant-profile media">
+  <div class="avatar media-left">
+    <div class="image"><img class="media-object avatar-96" src="<%= owner.logo.url(:big) %>" alt="<%= owner.id %>"></div>
+    <div class="level"><span class="label label-auth-type-<%= owner.auth_type %> role <%= owner.opened ? '' : 'account-block' %>"><%= owner.opened ? I18n.t("common.merchant.auth_type_#{owner.auth_type}") : '账号被禁用' %></span></div>
+  </div>
+  <div class="media-body">
+    <div class="item">
+      <span class="name"><%= owner.name %></span>
+      <span class="opts pull-right">
+      </span>
+    </div>
+    <div class="item number">
+      入驻日期: <span title="入驻日期"><%= owner.created_at.strftime('%Y-%m-%d') %></span>
+    </div>
+    
+    <div class="item number">
+      联系电话: <span title="入驻日期"><%= owner.mobile %></span>
+    </div>
+    <div class="item number">
+      公司地址: <span title="入驻日期"><%= owner.address %></span>
+    </div>
+    <div class="item number">
+      描述标签: <span title="入驻日期"><%= owner.tags.join(' ') %></span>
+    </div>
+
+  </div>
+  
+  <div class="balance media-right">
+    <div class="money">
+      余额: <%= "#{owner.balance / 100.0}元" %>
+    </div>
+    <div class="charge-button-box pull-right">
+      <span class="charge-button "><a href="#">充值</a></span>
+    </div>
+  </div>
+  
+</div>

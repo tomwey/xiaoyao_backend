@@ -1,0 +1,51 @@
+<%
+@win_prize = lucky_draw.win_prize(nil)
+ %>
+
+<div>中奖奖项：<%= @win_prize.name %></div>
+<div id="ww_page">
+  <div id="ww_box">
+    <div id="ww_rotate">
+      <div id="ww_plate" style="background-image:url(<%= lucky_draw.plate_image.url %>)"></div>
+      <div id="ww_arrow" style="background-image:url(<%= lucky_draw.arrow_image.url %>)"></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+//缩放
+scalePage('#ww_box');
+
+// 奖品数据    
+// var prizeData = [];
+
+//旋转
+var arrow = document.getElementById('ww_arrow'), 
+    plate = document.getElementById('ww_plate'),
+    isRotate = false;
+arrow.onclick = function() {
+    if (isRotate) return;
+    isRotate = true;
+     
+    // var num = (Math.random() * prizeData.length) >> 0,
+    
+     
+    var data = { angle: <%= @win_prize.angle %>, prize: '<%= @win_prize.name %>' };
+    
+    console.log(data);
+    // console.time('计时');
+    new Rotate({
+        el: plate,
+        //angle: 90,
+        animateTo: data.angle,
+        duration: 5000,
+        easeing: 'easeInOutCirc',
+        end: function() {
+            // console.timeEnd('计时');
+            isRotate = false;
+            // Tips.alert(data.prize);
+            console.log(data.prize);
+        }
+    });
+};
+</script>

@@ -1,0 +1,39 @@
+<div class="container">
+  <%= simple_form_for(@event, html: { class: 'form-horizontal form-label-left', id: 'product_form' },
+    wrapper: :horizontal_form,
+    wrapper_mappings: {
+      check_boxes: :horizontal_radio_and_checkboxes,
+      radio_buttons: :horizontal_radio_and_checkboxes,
+      file: :horizontal_file_input,
+      boolean: :horizontal_boolean
+    }) do |f| %>
+      <input name="token" type="hidden" value="<%= params[:token] %>">
+      <%= f.input :title %>
+      <%= f.input :image, hint: '图片格式为：jpg, jpeg, png；图片尺寸为：750x512' %>
+      <%= f.input :body, as: :text, input_html: { class: 'redactor' },placeholder: '网页内容，支持图文混排', hint: '网页内容，支持图文混排' %>
+      <%= f.input :location_str %>
+      <%= f.input :range %>
+      <%= f.input :started_at, as: :string, placeholder: '例如：2017-01-10 18:00' %>
+      <%= f.input :sort %>
+      <%= f.input :rule_type, as: :select, label: '活动规则', collection: [['题目类活动规则', 'quiz'], ['签到类活动规则', 'checkin']], prompt: '-- 选择活动规则类型 --', input_html: { id: 'rule-type' } %>
+      
+      <%= f.simple_fields_for :hongbao do |h| %>
+        <%= h.input :_type, as: :select, collection: [['随机红包', 0], ['固定红包', 1]], prompt: '-- 选择红包类型 --', input_html: { id: 'hb-type' } %>
+        <div id="random-hb" class="random-hb">
+          <%= h.input :total_money %>
+          <%= h.input :min_value %>
+          <%= h.input :max_value %>
+        </div>
+        <div id="fixed-hb" class="fixd-hb">
+          <%= h.input :value, required: true %>
+          <%= h.input :quantity, required: true %>
+        </div>
+      <% end %>      
+      <div class="form-group">
+        <div class="col-md-6 col-md-offset-3">
+          <%= link_to '取消', :back, class: "btn btn-primary" %>
+          <button type="submit" class="btn btn-success"><%= f.object.new_record? ? "确定发布" : "保存" %></button>
+        </div>
+      </div>
+  <% end %>
+</div>

@@ -1,0 +1,46 @@
+<!-- <nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <h2 class="title">红包结果</h2>
+  </div>
+</nav> -->
+
+<div id="hb-result-modal">
+  <div class="user-info">
+    <%= user_avatar_tag(@redbag.ownerable, :big, 'img-circle avatar') %>
+    <h4 class="nickname">
+      <%= @redbag.ownerable.try(:format_nickname) || '官方平台' %>
+    </h4>
+    <p class="ga" id="result-tip"><%= @money ? '恭喜发财，大吉大利！' : '温馨提示' %></p>
+  </div>
+
+  <div class="hb-result <%= @money.blank? ? 'hb-result-fail' : 'hb-result-success' %>" id="hb-result">
+    <% if @money %>
+    <span class="money"><%= @money %> <span class="unit">元</span></span>
+    <!-- p class="follow-tips">温馨提示：亲！红包零钱会放入您“小优大惠 (微信号：xiaoyoudahui) ”的钱包里面，请关注公众号领取！</p -->
+    <p class="follow-tips">温馨提示：您所抢红包会放入“小优大惠 (微信号：xiaoyoudahui) ”的钱包里面，请点击下方按钮关注领取</p>
+    <% else %>
+    <%= @msg %>
+    <% end %>
+  </div>
+  
+  <div class="container share-button-container">
+    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#follow-modal">关注公众号，抢更多现金红包</button>
+  </div>
+</div>
+
+<div id="follow-modal" class="modal " role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="follow-tip">
+          <div id="follow-tip">
+            <p>识别二维码，关注公众号</p>
+          </div>
+          <%= image_tag CommonConfig.offical_share_result_qrcode, class: 'qrcode-img' %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
