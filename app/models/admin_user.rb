@@ -11,7 +11,11 @@ class AdminUser < ActiveRecord::Base
   
   # 管理员
   def admin?
-    super_admin? || SiteConfig.admin_managers.split(',').include?(self.email)
+    super_admin? || SiteConfig.admin_managers.split(',').include?(self.email) || self.role.to_sym == :admin
+  end
+  
+  def agent?
+    admin? || self.role.to_sym == :agent
   end
   #
   # # 站点编辑人员
@@ -29,18 +33,18 @@ class AdminUser < ActiveRecord::Base
   #   admin? || self.role.to_sym == :limited_user
   # end
   #
-  # def self.roles
-  #   if SiteConfig.roles
-  #     SiteConfig.roles.split(',')
-  #   else
-  #     []
-  #   end
-  # end
-  #
-  # def role_name
-  #   return '管理员' if super_admin?
-  #   return '' if role.blank?
-  #   I18n.t("common.#{role}")
-  # end
+  def self.roles
+    if SiteConfig.roles
+      SiteConfig.roles.split(',')
+    else
+      []
+    end
+  end
+  
+  def role_name
+    return '管理员' if super_admin?
+    return '' if role.blank?
+    I18n.t("common.#{role}")
+  end
   
 end
