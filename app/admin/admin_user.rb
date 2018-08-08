@@ -11,7 +11,7 @@ ActiveAdmin.register AdminUser do
     selectable_column
     id_column
     column :email
-    column :role_name
+    column '角色', :role_name
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -44,7 +44,7 @@ ActiveAdmin.register AdminUser do
       end
       f.input :password
       f.input :password_confirmation
-      f.input :role, as: :radio, collection: AdminUser.roles.map { |role| [I18n.t("common.#{role}"), role] }
+      f.input :role, label: '角色', as: :radio, collection: AdminUser.roles.map { |role| [I18n.t("common.#{role}"), role] }
     end
     f.actions
   end

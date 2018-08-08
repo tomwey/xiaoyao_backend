@@ -4,6 +4,7 @@
     admin: '管理员'
     site_editor: '站点编辑'
     marketer: '市场人员'
+    agent: '代理'
     limited_user: '普通管理员'
     approved: '已审核'
     rejected: '已拒绝'
