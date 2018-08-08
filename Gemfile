@@ -32,8 +32,8 @@ gem 'pg', '0.20.0'
 # gem 'bower-rails'
 
 # Postgis 2.0+
-gem 'rgeo'
-gem 'activerecord-postgis-adapter'
+# gem 'rgeo'
+# gem 'activerecord-postgis-adapter'
 
 # 防止大量请求的IP
 gem 'rack-attack'
@@ -54,7 +54,7 @@ gem 'actionpack-xml_parser'
 
 # 生成二维码
 # gem 'rqrcode_png'
-gem 'rqrcode'
+# gem 'rqrcode'
 
 # redis
 gem 'redis'

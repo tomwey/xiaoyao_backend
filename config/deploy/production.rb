@@ -23,9 +23,10 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server '220.167.103.56', user: "deployer", roles: %w{web app db}, primary: true
+server '220.167.103.56', user: "root", roles: %w{web app db}, primary: true
 
-set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
+set :deploy_to, "/srv/MeiShanServer/apps/#{fetch(:full_app_name)}"
+#"/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
 #"/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
 
 set :rails_env, :production
