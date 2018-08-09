@@ -1,5 +1,5 @@
 require 'open-uri'
-require 'rqrcode'
+# require 'rqrcode'
 class HomeController < ApplicationController
   def error_404
     render text: 'Not found', status: 404, layout: false
@@ -20,6 +20,15 @@ class HomeController < ApplicationController
       end
     else
       @app_url = "#{app_download_url}"
+    end
+    
+  end
+  
+  def share
+    @type = params[:type]
+    if not %w(1 2).include? @type.to_s 
+      render text: '不正确的type参数', status: 400
+      return
     end
     
   end

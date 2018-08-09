@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get 'app/download' => 'home#download'
   get 'app/install'  => 'home#install'
   
+  # /share?type=1或2&game_id=39383838&inviter_id=49494848&headurl=xxxxx&nick=xxxxxxxtitle=血战
+  get 'share' => 'home#share'
+  
   # 网页文档
   resources :pages, path: :p, only: [:show]
   

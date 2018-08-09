@@ -1,0 +1,47 @@
+<div class="<%= @type.to_i == 1 ? 'download-wrap' : 'game-wrap' %>">
+  <!-- <img class="logo" src=""> -->
+  <%= image_tag 'icon_logo.png', class: "logo" %>
+  <h2 class="name">逍遥棋牌</h2>
+  <p class="slogan">眉山麻将、二七十等地方好玩游戏，等你来High, 来赚钱。自在逍遥~~~</p>
+  <a class="download-btn">
+    立即下载
+  </a>
+</div>
+
+<% content_for :scripts do %>
+<script src="https://lkme.cc/js/linkedme.min.js"></script>
+<script>
+  var type = '<%= @type %>';
+  var param;
+  if (type == '2') {
+    param = {
+      type: type,
+      inviter_id: '<%= params[:inviter_id] %>',
+      game_id: '<%= params[:game_id] %>'
+    };
+  } else {
+    param = {
+      type: type,
+      game_id: '<%= params[:game_id] %>'
+    };
+  }
+  
+  var data = {};
+  data.type = "live";
+  data.params = JSON.stringify(param);
+  data.tags = '<%= params[:game_id] %>';
+  linkedme.init("<%= SiteConfig.linked_me_key %>", { type: 'live' }, function(err, d) {
+    if (err) {
+      alert('深度链接初始化失败');
+    } else {
+      linkedme.link(data, function(err2,dd) {
+        if (err2) {
+          alert("深度链接生成失败");
+        } else {
+          $('.download-btn').attr('href', dd.url);
+        }
+      }, false);
+    }
+  });
+</script>
+<% end %>
