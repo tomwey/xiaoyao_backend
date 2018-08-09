@@ -1,10 +1,30 @@
 <div class="<%= @type.to_i == 1 ? 'download-wrap' : 'game-wrap' %>">
   <!-- <img class="logo" src=""> -->
-  <%= image_tag 'icon_logo.png', class: "logo" %>
-  <h2 class="name">逍遥棋牌</h2>
-  <p class="slogan">眉山麻将、二七十等地方好玩游戏，等你来High, 来赚钱。自在逍遥~~~</p>
+  <% if @type.to_i == 2 %>
+    <div class="logo-box">
+      <%= image_tag 'icon_logo.png' %>
+      <span class="title">逍遥棋牌</span>
+    </div>
+    <div class="game-box">
+      <div class="inviter">
+        <%= image_tag "#{params[:headurl]}" %>
+        <h2 class="nick"><%= params[:nick] %></h2>
+      </div>
+      <div class="base">
+        <p>来自<%= params[:group] %><br>约你加入牌桌<br><span class="game-name"><%= params[:game_name] %></span></p>
+      </div>
+      <div class="detail">
+        <p><%= params[:ante] %>&emsp;<%= params[:multiple] %></p>
+        <p><%= params[:playing] %></p>
+      </div>
+    </div>
+  <% else %>
+    <%= image_tag 'icon_logo.png', class: "logo" %>
+    <h2 class="name">逍遥棋牌</h2>
+    <p class="slogan">眉山麻将、二七十等地方好玩游戏，等你来High, 来赚钱。自在逍遥~~~</p>
+  <% end %>
   <a class="download-btn">
-    立即下载
+    <%= @type.to_i == 2 ? '进入牌桌' : '立即下载' %>
   </a>
 </div>
 
@@ -17,7 +37,8 @@
     param = {
       type: type,
       inviter_id: '<%= params[:inviter_id] %>',
-      game_id: '<%= params[:game_id] %>'
+      game_id: '<%= params[:game_id] %>',
+      team_id: '<%= params[:team_id] %>'
     };
   } else {
     param = {
