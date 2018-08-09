@@ -33,17 +33,19 @@
 <script>
   var type = '<%= @type %>';
   var param;
-  if (type == '2') {
+  if (type == '1') {
     param = {
       type: type,
-      inviter_id: '<%= params[:inviter_id] %>',
-      game_id: '<%= params[:game_id] %>',
-      team_id: '<%= params[:team_id] %>'
+      game_id: '<%= params[:game_id] %>'
     };
   } else {
     param = {
       type: type,
-      game_id: '<%= params[:game_id] %>'
+      inviter_id: '<%= params[:inviter_id] %>',
+      game_id: '<%= params[:game_id] %>',
+      team_id: '<%= params[:team_id] %>',
+      roomid: '<%= params[:roomid] %>',
+      groupid: '<%= params[:groupid] %>'
     };
   }
   
