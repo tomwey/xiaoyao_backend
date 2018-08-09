@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   
   def share
     @type = params[:type]
-    if not %w(1 2).include? @type.to_s 
+    if not %w(1 2 3).include? @type.to_s 
       render text: '不正确的type参数', status: 400
       return
     end
